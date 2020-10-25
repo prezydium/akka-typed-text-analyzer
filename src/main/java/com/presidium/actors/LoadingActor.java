@@ -4,7 +4,7 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Receive;
 
-public class LoadingActor extends AbstractBehavior<MainActor.StartLoading> {
+public class LoadingActor extends AbstractBehavior<MainActor.LoadingTrigger> {
     public LoadingActor(ActorContext context) {
         super(context);
     }

@@ -1,19 +1,30 @@
 package com.presidium.actors;
 
-import akka.actor.typed.Behavior;
+import akka.actor.Terminated;
+import akka.actor.typed.javadsl.AbstractBehavior;
+import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
+import akka.actor.typed.javadsl.Receive;
 
 import java.util.List;
 
-public class MainActor {
+public class MainActor extends AbstractBehavior<Void> {
 
 
+    public MainActor(ActorContext<Void> context) {
+        super(context);
+    }
 
-    public static class StartLoading{
-        private List<String> filesToLoad;
+    @Override
+    public Receive<Void> createReceive() {
+        return null;
+    }
 
-        public StartLoading(List<String> filesToLoad) {
-            this.filesToLoad = filesToLoad;
+    public static class LoadingTrigger {
+        private List<String> filenamesToLoad;
+
+        public LoadingTrigger(List<String> filenamesToLoad) {
+            this.filenamesToLoad = filenamesToLoad;
         }
     }
 
