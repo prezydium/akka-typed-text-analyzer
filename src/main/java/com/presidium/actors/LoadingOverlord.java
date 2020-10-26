@@ -6,8 +6,12 @@ import akka.actor.typed.javadsl.*;
 public class LoadingOverlord extends AbstractBehavior<MainActor.LoadingTrigger> {
 
 
-    public LoadingOverlord(ActorContext<MainActor.LoadingTrigger> context) {
+    private LoadingOverlord(ActorContext<MainActor.LoadingTrigger> context) {
         super(context);
+    }
+
+    public static Behavior<MainActor.LoadingTrigger> create(){
+        return Behaviors.setup(LoadingOverlord::new);
     }
 
     @Override
