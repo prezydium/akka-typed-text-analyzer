@@ -5,16 +5,16 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
+import akka.actor.typed.receptionist.Receptionist;
 import com.presidium.actors.message.load.StartLoading;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
+
+
 
 @Slf4j
 public class LoadingActor extends AbstractBehavior<StartLoading> {
@@ -40,6 +40,8 @@ public class LoadingActor extends AbstractBehavior<StartLoading> {
         String fileName = msg.getFileToLoad();
         try {
             String fullText = String.join("\n", Files.readAllLines(Paths.get("src/main/resources/" + fileName)));
+            LoadedData loadedDataMessage = new LoadedData(fullText);
+            //todo add receptionist
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,7 +50,7 @@ public class LoadingActor extends AbstractBehavior<StartLoading> {
 
 
     @Value
-    private static class LoadedData {
+    public static class LoadedData {
         String loadedData;
     }
 }
