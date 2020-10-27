@@ -1,16 +1,10 @@
 package com.presidium.actors.message.load;
 
+import lombok.Value;
+
+@Value
 public class StartLoading implements DataLoading{
 
-    private final String fileToLoad;
+    String fileToLoad;
 
-
-    public StartLoading(String fileToLoad) {
-        this.fileToLoad = fileToLoad;
-    }
-
-    @Override
-    public String getFileName() {
-        return fileToLoad;
-    }
 }
