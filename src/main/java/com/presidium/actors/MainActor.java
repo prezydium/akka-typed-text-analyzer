@@ -6,8 +6,7 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.presidium.actors.message.load.LoadedData;
-import com.presidium.actors.message.load.MainActorCommand;
+import com.presidium.actors.protocol.MainActorCommand;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,11 +32,11 @@ public class MainActor extends AbstractBehavior<MainActorCommand> {
     @Override
     public Receive<MainActorCommand> createReceive() {
         return newReceiveBuilder()
-                .onMessage(LoadedData.class, this::forwardForAnalysis)
+                .onMessage(MainActorCommand.LoadedData.class, this::forwardForAnalysis)
                 .build();
     }
 
-    private Behavior<MainActorCommand> forwardForAnalysis(LoadedData msg) {
+    private Behavior<MainActorCommand> forwardForAnalysis(MainActorCommand.LoadedData msg) {
         dataAnalysisActorRef.tell(msg);
         return this;
     }

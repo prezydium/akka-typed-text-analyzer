@@ -7,7 +7,6 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import akka.actor.typed.receptionist.Receptionist;
 import akka.actor.typed.receptionist.ServiceKey;
-import com.presidium.actors.message.load.LoadedData;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
