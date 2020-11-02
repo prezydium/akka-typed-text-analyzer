@@ -29,8 +29,8 @@ public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommand
     }
 
     private Behavior<DataAnalysisActorCommands> startAnalysis(DataAnalysisActorCommands.StartAnalysing msg) {
-/*        log.info("Received data from file " + msg.getLoadedFilename());
-        log.info(msg.getLoadedText());*/
+        log.info("Received data from file " + msg.getFilename());
+        log.info(msg.getText());
         return this;
     }
 }

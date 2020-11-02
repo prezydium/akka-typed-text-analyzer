@@ -5,7 +5,7 @@ import lombok.Value;
 public interface MainActorCommand {
 
     @Value
-    class LoadedData implements LoadingOverlordActorCommands {
+    class LoadedData implements MainActorCommand {
         String fileName;
         String loadedText;
     }

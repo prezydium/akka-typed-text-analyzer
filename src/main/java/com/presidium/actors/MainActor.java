@@ -6,16 +6,19 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
+import com.presidium.actors.protocol.DataAnalysisActorCommands;
+import com.presidium.actors.protocol.LoadingOverlordActorCommands;
 import com.presidium.actors.protocol.MainActorCommand;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+import static com.presidium.actors.protocol.MainActorCommand.LoadedData;
+
 @Slf4j
 public class MainActor extends AbstractBehavior<MainActorCommand> {
 
-    private ActorRef<LoadedData> dataAnalysisActorRef;
+    private ActorRef<DataAnalysisActorCommands> dataAnalysisActorRef;
 
     public static Behavior<MainActorCommand> create(List<String> fileNames) {
         return Behaviors.setup(ctx -> new MainActor(ctx, fileNames));
@@ -24,27 +27,22 @@ public class MainActor extends AbstractBehavior<MainActorCommand> {
     private MainActor(ActorContext<MainActorCommand> context, List<String> filenames) {
         super(context);
         log.info("MainActor Started");
-        ActorRef<LoadingTrigger> loadingOverlord = context.spawn(LoadingOverlord.create(), "loadingOverlord");
+        ActorRef<LoadingOverlordActorCommands> loadingOverlord =
+                context.spawn(LoadingOverlord.create(context.getSelf()), "loadingOverlord");
         dataAnalysisActorRef = context.spawn(DataAnalysisActor.create(), "dataAnalysis");
-        loadingOverlord.tell(new LoadingTrigger(filenames));
+        loadingOverlord.tell(new LoadingOverlordActorCommands.LoadingTrigger(filenames, context.getSelf()));
     }
 
     @Override
     public Receive<MainActorCommand> createReceive() {
         return newReceiveBuilder()
-                .onMessage(MainActorCommand.LoadedData.class, this::forwardForAnalysis)
+                .onMessage(LoadedData.class, this::forwardForAnalysis)
                 .build();
     }
 
-    private Behavior<MainActorCommand> forwardForAnalysis(MainActorCommand.LoadedData msg) {
-        dataAnalysisActorRef.tell(msg);
+    private Behavior<MainActorCommand> forwardForAnalysis(LoadedData msg) {
+        dataAnalysisActorRef.tell(new DataAnalysisActorCommands.StartAnalysing(msg.getFileName(), msg.getLoadedText()));
         return this;
-    }
-
-
-    @Value
-    public static class LoadingTrigger {
-        List<String> filenamesToLoad;
     }
 
 }
