@@ -18,7 +18,7 @@ import static com.presidium.actors.protocol.MainActorCommand.LoadedData;
 @Slf4j
 public class MainActor extends AbstractBehavior<MainActorCommand> {
 
-    private ActorRef<DataAnalysisActorCommands> dataAnalysisActorRef;
+    private final ActorRef<DataAnalysisActorCommands> dataAnalysisActorRef;
 
     public static Behavior<MainActorCommand> create(List<String> fileNames) {
         return Behaviors.setup(ctx -> new MainActor(ctx, fileNames));

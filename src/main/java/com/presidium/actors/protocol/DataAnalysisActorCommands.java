@@ -9,4 +9,11 @@ public interface DataAnalysisActorCommands {
         String filename;
         String text;
     }
+
+    @Value
+    class AnalysisResult implements DataAnalysisActorCommands {
+        String id;
+        String ruleName;
+        Double result;
+    }
 }
