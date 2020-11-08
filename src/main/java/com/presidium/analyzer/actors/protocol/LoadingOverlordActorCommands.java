@@ -1,4 +1,4 @@
-package com.presidium.actors.protocol;
+package com.presidium.analyzer.actors.protocol;
 
 import akka.actor.typed.ActorRef;
 import lombok.Value;

@@ -1,4 +1,4 @@
-package com.presidium.actors;
+package com.presidium.analyzer.actors;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.Behavior;
@@ -6,14 +6,14 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.presidium.actors.protocol.DataAnalysisActorCommands;
-import com.presidium.actors.protocol.LoadingOverlordActorCommands;
-import com.presidium.actors.protocol.MainActorCommand;
+import com.presidium.analyzer.actors.protocol.DataAnalysisActorCommands;
+import com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands;
+import com.presidium.analyzer.actors.protocol.MainActorCommand;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static com.presidium.actors.protocol.MainActorCommand.LoadedData;
+import static com.presidium.analyzer.actors.protocol.MainActorCommand.LoadedData;
 
 @Slf4j
 public class MainActor extends AbstractBehavior<MainActorCommand> {

@@ -1,18 +1,22 @@
-package com.presidium.actors;
+package com.presidium.analyzer.actors;
 
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.presidium.actors.analysis.AnalysisCache;
-import com.presidium.actors.protocol.DataAnalysisActorCommands;
-import com.presidium.actors.rule.Rule;
+import com.presidium.analyzer.actors.protocol.DataAnalysisActorCommands;
+import com.presidium.analyzer.analysis.AnalysisCache;
+import com.presidium.analyzer.rule.Rule;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
 
-import static com.presidium.actors.protocol.DataAnalysisActorCommands.*;
+import static com.presidium.analyzer.actors.protocol.DataAnalysisActorCommands.AnalysisResult;
+import static com.presidium.analyzer.actors.protocol.DataAnalysisActorCommands.StartAnalysing;
 
 @Slf4j
 public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommands> {
@@ -40,7 +44,7 @@ public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommand
     private Behavior<DataAnalysisActorCommands> processAnalysisResults(AnalysisResult msg) {
         AnalysisCache analysisCache = cache.get(msg.getId());
         analysisCache.getAnalysisResult().put(msg.getRuleName(), msg.getResult());
-        if (analysisCache.getAnalysisResult().keySet().containsAll(Arrays.asList(Rule.values()))){
+        if (analysisCache.getAnalysisResult().keySet().containsAll(Arrays.asList(Rule.values()))) {
             //todo finish
         } else {
             //todo continue

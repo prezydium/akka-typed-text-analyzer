@@ -1,8 +1,8 @@
-package com.presidium;
+package com.presidium.analyzer;
 
 
 import akka.actor.typed.ActorSystem;
-import com.presidium.actors.MainActor;
+import com.presidium.analyzer.actors.MainActor;
 
 import java.util.List;
 

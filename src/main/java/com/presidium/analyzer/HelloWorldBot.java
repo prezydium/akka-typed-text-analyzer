@@ -1,4 +1,4 @@
-package com.presidium.example;
+package com.presidium.analyzer;
 
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;

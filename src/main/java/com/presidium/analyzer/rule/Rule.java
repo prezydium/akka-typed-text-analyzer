@@ -1,4 +1,4 @@
-package com.presidium.actors.rule;
+package com.presidium.analyzer.rule;
 
 import lombok.Getter;
 

@@ -1,12 +1,12 @@
-package com.presidium.actors;
+package com.presidium.analyzer.actors;
 
 import akka.actor.typed.Behavior;
 import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.presidium.actors.protocol.LoadingActorCommands;
-import com.presidium.actors.protocol.LoadingOverlordActorCommands;
+import com.presidium.analyzer.actors.protocol.LoadingActorCommands;
+import com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.presidium.actors;
+package com.presidium.analyzer.actors;
 
 import akka.actor.typed.ActorRef;
 import akka.actor.typed.Behavior;
@@ -6,16 +6,16 @@ import akka.actor.typed.javadsl.AbstractBehavior;
 import akka.actor.typed.javadsl.ActorContext;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
-import com.presidium.actors.protocol.LoadingActorCommands;
-import com.presidium.actors.protocol.LoadingOverlordActorCommands;
-import com.presidium.actors.protocol.MainActorCommand;
+import com.presidium.analyzer.actors.protocol.LoadingActorCommands;
+import com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands;
+import com.presidium.analyzer.actors.protocol.MainActorCommand;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-import static com.presidium.actors.protocol.LoadingActorCommands.*;
-import static com.presidium.actors.protocol.LoadingOverlordActorCommands.LoadedData;
-import static com.presidium.actors.protocol.LoadingOverlordActorCommands.LoadingTrigger;
+import static com.presidium.analyzer.actors.protocol.LoadingActorCommands.StartLoading;
+import static com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands.LoadedData;
+import static com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands.LoadingTrigger;
 
 @Slf4j
 public class LoadingOverlord extends AbstractBehavior<LoadingOverlordActorCommands> {

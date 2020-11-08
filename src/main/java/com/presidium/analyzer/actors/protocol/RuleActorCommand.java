@@ -1,9 +1,8 @@
-package com.presidium.actors.protocol;
+package com.presidium.analyzer.actors.protocol;
 
 import akka.actor.typed.ActorRef;
+import com.presidium.analyzer.rule.Rule;
 import lombok.Value;
-
-import java.util.function.Function;
 
 public interface RuleActorCommand {
 
@@ -12,7 +11,7 @@ public interface RuleActorCommand {
         String id;
         String text;
         ActorRef<DataAnalysisActorCommands> replyTo;
-        Function<String, Double> analysisFormula;
+        Rule rule;
     }
 
 

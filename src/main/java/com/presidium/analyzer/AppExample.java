@@ -1,5 +1,4 @@
-package com.presidium.example;
-
+package com.presidium.analyzer;
 
 
 import akka.actor.typed.ActorSystem;

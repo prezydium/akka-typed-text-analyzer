@@ -1,4 +1,4 @@
-package com.presidium.actors.analysis;
+package com.presidium.analyzer.analysis;
 
 import lombok.Value;
 
