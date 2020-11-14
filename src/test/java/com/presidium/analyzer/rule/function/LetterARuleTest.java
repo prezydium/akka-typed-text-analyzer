@@ -15,8 +15,13 @@ class LetterARuleTest {
         String testInput = "blehblehbleh\n bleh";
         Double result = ruleA.getAnalysisFunction().apply(testInput);
         assertEquals(0, result, 0);
-
     }
 
+    @Test
+    public void shouldReturn3(){
+        String testInput = "aa, thisisintresting , right? or maybe not.";
+        Double result = ruleA.getAnalysisFunction().apply(testInput);
+        assertEquals(3, result, 0);
+    }
 
 }

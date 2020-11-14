@@ -10,6 +10,7 @@ import com.presidium.analyzer.actors.protocol.LoadingOverlordActorCommands;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -38,9 +39,9 @@ public class LoadingActor extends AbstractBehavior<LoadingActorCommands> {
         log.info("Received" + msg);
         String fileName = msg.getFileToLoad();
         try {
-            String fullText = String.join("\n", Files.readAllLines(Paths.get("src/main/resources/" + fileName)));
+            String fullText = String.join("\n", Files.readAllLines(Paths.get(LoadingActor.class.getClassLoader().getResource(fileName).toURI())));
             msg.getParent().tell(new LoadingOverlordActorCommands.LoadedData(fileName, fullText));
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             e.printStackTrace();
         }
         return this;
