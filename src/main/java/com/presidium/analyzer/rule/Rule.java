@@ -1,12 +1,13 @@
 package com.presidium.analyzer.rule;
 
+import com.presidium.analyzer.rule.function.LetterARule;
 import lombok.Getter;
 
 import java.util.function.Function;
 
 @Getter
 public enum Rule {
-    WORD_A_OCCURRENCE(null),
+    LETTER_A_OCCURRENCE(new LetterARule()),
     LONGEST_WORD(null),
     WORD_EYE_OCCURRENCE(null),
     WORD_GOD_OCCURRENCE(null),
