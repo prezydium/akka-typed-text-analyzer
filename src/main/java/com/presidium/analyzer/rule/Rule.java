@@ -1,6 +1,7 @@
 package com.presidium.analyzer.rule;
 
 import com.presidium.analyzer.rule.function.LetterARule;
+import com.presidium.analyzer.rule.function.WordGodRule;
 import lombok.Getter;
 
 import java.util.function.Function;
@@ -10,7 +11,7 @@ public enum Rule {
     LETTER_A_OCCURRENCE(new LetterARule()),
     LONGEST_WORD(null),
     WORD_EYE_OCCURRENCE(null),
-    WORD_GOD_OCCURRENCE(null),
+    WORD_GOD_OCCURRENCE(new WordGodRule()),
     NUMBER_OF_SPACES(null);
 
     private final String name;

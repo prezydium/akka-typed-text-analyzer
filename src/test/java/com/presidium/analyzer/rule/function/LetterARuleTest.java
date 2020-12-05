@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LetterARuleTest {
 
-    Rule ruleA = Rule.LETTER_A_OCCURRENCE;
+    private final Rule ruleA = Rule.LETTER_A_OCCURRENCE;
 
     @Test
     public void shouldReturn0(){
