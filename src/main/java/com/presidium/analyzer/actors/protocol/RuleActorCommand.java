@@ -19,7 +19,6 @@ public interface RuleActorCommand {
     @Value
     class AnalyzeDependentRuleMessage implements RuleActorCommand {
         String id;
-        String text;
         ActorRef<DataAnalysisActorCommands> replyTo;
         AnalysisCache analysisCache;
         DependentRule rule;

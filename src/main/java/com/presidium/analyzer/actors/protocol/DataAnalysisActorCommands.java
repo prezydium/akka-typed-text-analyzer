@@ -12,9 +12,8 @@ public interface DataAnalysisActorCommands {
 
     @Value
     class AnalysisResult implements DataAnalysisActorCommands {
-        String id;
+        String fileName;
         String ruleName;
         Double result;
-        String text;
     }
 }

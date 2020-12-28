@@ -43,7 +43,7 @@ public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommand
     }
 
     private Behavior<DataAnalysisActorCommands> processAnalysisResults(AnalysisResult msg) {
-        AnalysisCache analysisCache = this.results.get(msg.getId());
+        AnalysisCache analysisCache = this.results.get(msg.getFileName());
         analysisCache.getAnalysisResult().put(msg.getRuleName(), msg.getResult());
         int resultSize = analysisCache.getAnalysisResult().keySet().size();
         if (resultSize < independentRulesSize) {
@@ -52,7 +52,7 @@ public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommand
                     .findAny()
                     .orElseThrow();
             IndependentRule nextRule = IndependentRule.valueOf(notProcessedRuleName);
-            ruleWorkers.tell(new RuleActorCommand.AnalyzeIndependentRuleMessage(msg.getId(), msg.getText(), getContext().getSelf(), nextRule));
+            ruleWorkers.tell(new RuleActorCommand.AnalyzeIndependentRuleMessage(msg.getFileName(), analysisCache.getText(), getContext().getSelf(), nextRule));
         } else if (resultSize < allRulesSize){
             String notProcessedRuleName = DependentRule.getListOfRuleNames().stream()
                     .filter(x -> !analysisCache.getAnalysisResult().containsKey(x))
@@ -60,10 +60,10 @@ public class DataAnalysisActor extends AbstractBehavior<DataAnalysisActorCommand
                     .orElseThrow();
             DependentRule nextRule = DependentRule.valueOf(notProcessedRuleName);
 
-            ruleWorkers.tell(new RuleActorCommand.AnalyzeDependentRuleMessage(msg.getId(), msg.getText(), getContext().getSelf(), analysisCache, nextRule));
+            ruleWorkers.tell(new RuleActorCommand.AnalyzeDependentRuleMessage(msg.getFileName(), getContext().getSelf(), analysisCache, nextRule));
 
         } else {
-            log.info("finished analysis for {} with results: \n {}", msg.getId(), analysisCache.getAnalysisResult());
+            log.info("finished analysis for {} with results: \n {}", msg.getFileName(), analysisCache.getAnalysisResult());
         }
 
         return this;

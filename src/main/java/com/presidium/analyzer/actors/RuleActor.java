@@ -7,6 +7,7 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 import com.presidium.analyzer.actors.protocol.DataAnalysisActorCommands;
 import com.presidium.analyzer.actors.protocol.RuleActorCommand;
+import com.presidium.analyzer.analysis.AnalysisCache;
 import com.presidium.analyzer.rule.DependentRule;
 import com.presidium.analyzer.rule.IndependentRule;
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +39,10 @@ public class RuleActor extends AbstractBehavior<RuleActorCommand> {
     private Behavior<RuleActorCommand> analyzeDependent(RuleActorCommand.AnalyzeDependentRuleMessage message) {
         log.info("Starting to analyze " + message.getRule().getName());
         DependentRule rule = message.getRule();
+        AnalysisCache analysisCache = message.getAnalysisCache();
         BiFunction<String, Map<String, Double>, Double> analysisFunction = rule.getAnalysisFunction();
-        Double result = analysisFunction.apply(message.getText(), message.getAnalysisCache().getAnalysisResult());
-        message.getReplyTo().tell(new DataAnalysisActorCommands.AnalysisResult(message.getId(), rule.getName(), result, message.getText()));
+        Double result = analysisFunction.apply(analysisCache.getText(), analysisCache.getAnalysisResult());
+        message.getReplyTo().tell(new DataAnalysisActorCommands.AnalysisResult(message.getId(), rule.getName(), result));
         return this;
     }
 
@@ -49,7 +51,7 @@ public class RuleActor extends AbstractBehavior<RuleActorCommand> {
         IndependentRule rule = message.getRule();
         Function<String, Double> analysisFormula = rule.getAnalysisFunction();
         Double result = analysisFormula.apply(message.getText());
-        message.getReplyTo().tell(new DataAnalysisActorCommands.AnalysisResult(message.getId(), rule.getName(), result, message.getText()));
+        message.getReplyTo().tell(new DataAnalysisActorCommands.AnalysisResult(message.getId(), rule.getName(), result));
         return this;
     }
 
