@@ -1,6 +1,6 @@
 package com.presidium.analyzer.rule.function;
 
-import com.presidium.analyzer.rule.Rule;
+import com.presidium.analyzer.rule.IndependentRule;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LetterARuleTest {
 
-    private final Rule ruleA = Rule.LETTER_A_OCCURRENCE;
+    private final IndependentRule ruleA = IndependentRule.LETTER_A_OCCURRENCE;
 
     @Test
     public void shouldReturn0(){

@@ -1,13 +1,13 @@
 package com.presidium.analyzer.rule.function;
 
-import com.presidium.analyzer.rule.Rule;
+import com.presidium.analyzer.rule.IndependentRule;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class WordGodRuleTest {
 
-    private final Rule wordGodRule = Rule.WORD_GOD_OCCURRENCE;
+    private final IndependentRule wordGodRule = IndependentRule.WORD_GOD_OCCURRENCE;
 
 
     @Test

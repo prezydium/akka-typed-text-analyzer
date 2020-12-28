@@ -15,5 +15,6 @@ public interface DataAnalysisActorCommands {
         String id;
         String ruleName;
         Double result;
+        String text;
     }
 }
